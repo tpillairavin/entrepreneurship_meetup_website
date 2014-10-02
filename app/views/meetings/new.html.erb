@@ -1,6 +1,6 @@
 <h1>Create a new meeting</h1>
 
-<%= form_for @meeting, url do |f| %>
+<%= form_for @meeting do |f| %>
   <div><%= f.label :location %><br />
   <%= f.text_field :location %></div>
 
