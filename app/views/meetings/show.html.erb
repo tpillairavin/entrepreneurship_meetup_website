@@ -1,0 +1,14 @@
+<div>
+<h1>
+  Here are the upcoming meetings
+</h1>
+</div>
+<div>
+  <p>
+    <% @meetings.each do |m| %>
+      <%= m.location %>
+      <%= m.start_time %>
+    <br><br><br>
+   <% end %>
+  </p>
+</div>
