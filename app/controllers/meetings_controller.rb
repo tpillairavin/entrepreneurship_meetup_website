@@ -9,6 +9,9 @@ class MeetingsController < ApplicationController
     @meeting = Meeting.new(safe_meeting)
     if
       @meeting.save
+      users = User.all
+      users.each do |u|
+        UserMailer.welcome_email(u).deliver
       redirect_to "/meetings/show"
     else
       flash['issue'] = 'missing fields'
