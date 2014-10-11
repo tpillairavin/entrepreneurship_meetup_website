@@ -1,8 +1,16 @@
 <%= content_for :head do %>
+      <link rel="stylesheet" href="//code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css">
       <style type="text/css">
-      html, body, #map-canvas { height: 85%; margin: 0; padding: 0;}
+      html, body, #map-canvas { height: 100%; margin: 0; padding: 0;}
     </style>
     <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places"></script>
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="//code.jquery.com/ui/1.11.1/jquery-ui.js"></script>
+    <script>
+    $(function() {
+      $( "#datepicker" ).datepicker();
+      });
+    </script>
     <script>
       function initialize() {
 
@@ -85,16 +93,24 @@
     </script>
 <% end %>
     <h1>Create a new meeting</h1>
-    <div id="map-canvas"></div>
+    <div class="map-container">
+      <div id="map-canvas"></div>
+      <%= form_for @meeting do |f| %>
+        <div class="meeting-form">
+          <div>
+              <label for="meeting_location">Event Place</label>
+              <input id="meeting_location" placeholder="Your Location" name="meeting[location]", type="text", class="meeting-input" />
+          </div>
+          <div>
+            <label for="meeting_start_time">Start Time</label>
+            <input id="meeting_start_time" placeholder="9.00pm" name="meeting[start_time]", type="text", class="meeting-input" >
+          </div>
+          <div>
+            <label for="Date">Event Date</label>
+            <input type="text" id="datepicker", class="meeting-input"></p>
+          </div>
+          <div><%= f.submit "Create Meeting" %></div>
+        </div>
+      <% end %>
+    </div>
 
-<%= form_for @meeting do |f| %>
-  <div>
-      <label for="meeting_location">Location</label>
-      <input id="meeting_location" placeholder="Your Location" name="meeting[location]", type="text" />
-  </div>
-  <div>
-    <%= f.label :start_time %>
-    <%= f.text_field :start_time %>
-  </div>
-  <div><%= f.submit "Create Meeting" %></div>
-<% end %>
