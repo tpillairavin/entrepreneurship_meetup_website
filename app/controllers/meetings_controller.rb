@@ -1,5 +1,5 @@
 class MeetingsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, only: [:new, :create]
 
   def new
     @meeting = Meeting.new
@@ -13,7 +13,7 @@ class MeetingsController < ApplicationController
       users.each do |u|
         UserMailer.welcome_email(u).deliver
       end
-      redirect_to "/meetings/show"
+      redirect_to "/meetings/#{@meeting.id}"
     else
       flash['issue'] = 'missing fields'
       redirect_to "/meetings/new"
@@ -21,11 +21,11 @@ class MeetingsController < ApplicationController
   end
 
   def show
-    @meetings = Meeting.all
+    @meeting = Meeting.find(params[:id])
   end
 
   private
     def safe_meeting
-      params.require('meeting').permit(:location, :start_time)
+      params.require('meeting').permit(:location, :start_time, :date)
     end
 end

@@ -1,14 +1,21 @@
 <div>
 <h1>
-  Here are the upcoming meetings
+  Here are the details of your meeting
 </h1>
 </div>
 <div>
   <p>
-    <% @meetings.each do |m| %>
-      <%= m.location %>
-      <%= m.start_time %>
+      <%= @meeting.location %>
+      <%= @meeting.start_time %>
+      <%= @meeting.date %>
     <br><br><br>
-   <% end %>
   </p>
 </div>
+
+<iframe
+  width="600"
+  height="450"
+  frameborder="0" style="border:0"
+  src="<%="https://www.google.com/maps/embed/v1/place?key=#{ENV['MAPS_API_KEY']}
+    &q=#{@meeting.location.gsub!(' ','+').gsub!(',+',',')}"%>">
+</iframe>
