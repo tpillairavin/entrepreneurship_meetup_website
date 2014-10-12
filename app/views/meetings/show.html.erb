@@ -1,6 +1,6 @@
 <div>
 <h1>
-  Here are the details of your meeting
+  Here are the details of the meeting
 </h1>
 </div>
 <div>
@@ -10,8 +10,15 @@
       <%= @meeting.date %>
     <br><br><br>
   </p>
+    <% if @meeting.entrepreneurs.include?(current_entrepreneur) %>
+      You are attending this meeting
+      <%= button_to "You aren't going anymore", "/leave/#{@meeting.id}", :method => :get %>
+    <% else %>
+      <%= button_to "Join", "/join/#{@meeting.id}", :method => :get%>
+    <% end %>
 </div>
 
+<div>
 <iframe
   width="600"
   height="450"
@@ -19,3 +26,4 @@
   src="<%="https://www.google.com/maps/embed/v1/place?key=#{ENV['MAPS_API_KEY']}
     &q=#{@meeting.location.gsub!(' ','+').gsub!(',+',',')}"%>">
 </iframe>
+</div>

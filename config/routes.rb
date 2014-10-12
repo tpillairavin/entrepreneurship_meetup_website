@@ -6,7 +6,8 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   root 'static_pages#index'
-
+  get '/join/:id' => 'meetings#join'
+  get '/leave/:id' => 'meetings#leave'
   get 'meetings' => 'meetings#new'
   resources :meetings
 

@@ -1,5 +1,6 @@
 class MeetingsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create]
+  before_action :authenticate_entrepreneur!, only: [:show]
 
   def new
     @meeting = Meeting.new
@@ -22,6 +23,20 @@ class MeetingsController < ApplicationController
 
   def show
     @meeting = Meeting.find(params[:id])
+  end
+
+  def join
+    @meeting = Meeting.find(params[:id])
+    @meeting.entrepreneurs << current_entrepreneur
+    @meeting.save
+    redirect_to "/meetings/#{@meeting.id}"
+  end
+
+  def leave
+    @meeting = Meeting.find(params[:id])
+    @meeting.entrepreneurs.delete(current_entrepreneur)
+    @meeting.save
+    redirect_to "/meetings/#{@meeting.id}"
   end
 
   private
