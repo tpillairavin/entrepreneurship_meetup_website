@@ -1,11 +1,11 @@
 <ul class="nav-pull-right">
   <% if entrepreneur_signed_in? %>
-    <%= link_to "Sign out", destroy_entrepreneur_session_path, method: :delete %>
+    <%= button_to "Sign out", destroy_entrepreneur_session_path, method: :delete, :class => 'footer_button' %>
   <% else %>
     <%= link_to "Sign in", entrepreneur_session_path %>
     <%= link_to "Register", new_entrepreneur_registration_path %>
   <% end %>
   <% if user_signed_in? %>
-    <%= link_to "Create a meeting", new_meeting_path %>
+    <%= button_to "Create a meeting", new_meeting_path, 'data-no-turbolink' => true, method: :get %>
   <% end %>
 </ul>

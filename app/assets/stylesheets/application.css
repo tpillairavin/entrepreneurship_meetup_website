@@ -52,6 +52,26 @@
 }
 
 
+.footer_button{
+  display: inline-block;
+  vertical-align: right;
+  padding: 0 12px;
+  line-height: 22px;
+  min-height: 22px;
+  border-style: solid;
+  border-width: 2px;
+  background-color: #498EE0;
+  border-color: #498EE0;
+  border-radius: 3px;
+  text-align: center;
+  font-size: 9px;
+  font-weight: 500;
+  color: #fff;
+  cursor: pointer;
+  text-transform: uppercase;
+}
+
+
  .meeting-form {
   position: absolute;
   top: 30px;
@@ -72,4 +92,8 @@
  .meeting-input {
   width: 250px;
   background: rgba(255,255,255,1);
+ }
+
+ .button_to {
+  display: inline-block;
  }

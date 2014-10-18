@@ -57,7 +57,12 @@ class MeetingsController < ApplicationController
 
   private
     def safe_meeting
-      params[:meeting][:date] = params[:meeting][:date].slice(6,4)+"/"+params[:meeting][:date].slice(0,2)+"/"+params[:meeting][:date].slice(3,2)
+      try {
+        params[:meeting][:date] = params[:meeting][:date].slice(6,4)+"/"+params[:meeting][:date].slice(0,2)+"/"+params[:meeting][:date].slice(3,2)
+      }
+      catch{
+        puts 'missing date params '
+      }
       params.require('meeting').permit(:location, :start_time, :date)
     end
 end
