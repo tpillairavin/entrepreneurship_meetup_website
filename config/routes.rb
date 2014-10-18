@@ -8,7 +8,9 @@ Rails.application.routes.draw do
   root 'static_pages#index'
   get '/join/:id' => 'meetings#join'
   get '/leave/:id' => 'meetings#leave'
+  get 'meetings/next' => 'meetings#next'
   get 'meetings' => 'meetings#new'
+  get 'meetings/add' => 'meetings#add'
   resources :meetings
 
 end

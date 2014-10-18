@@ -5,16 +5,19 @@
 </div>
 <div>
   <p>
-      <%= @meeting.location %>
-      <%= @meeting.start_time %>
-      <%= @meeting.date %>
-    <br><br><br>
+      Location: <%= @meeting.location %>
+      <br>
+      Start Time: <%= @meeting.start_time %>
+      <br>
+      Date: <%= @meeting.date.strftime("%d/%m/%y") %>
   </p>
     <% if @meeting.entrepreneurs.include?(current_entrepreneur) %>
       You are attending this meeting
       <%= button_to "You aren't going anymore", "/leave/#{@meeting.id}", :method => :get %>
+      <br>
     <% else %>
-      <%= button_to "Join", "/join/#{@meeting.id}", :method => :get%>
+      <%= button_to "Join", "/join/#{@meeting.id}", :method => :get, :class => :button_large_button_primary%>
+      <br>
     <% end %>
 </div>
 
@@ -26,4 +29,9 @@
   src="<%="https://www.google.com/maps/embed/v1/place?key=#{ENV['MAPS_API_KEY']}
     &q=#{@meeting.location.gsub!(' ','+').gsub!(',+',',')}"%>">
 </iframe>
+</div>
+<div>
+  <% if user_signed_in? %>
+    <%= link_to "Edit this meeting", "/meetings/#{@meeting.id}/edit" %>
+  <% end %>
 </div>

@@ -3,14 +3,16 @@
 <head>
   <title>Entrepreneurship</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css'>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
   <%= yield(:head) %>
 </head>
-<body onload="initialize()">
+<body onload="initialize()" class="u-text-align-center">
   <% flash.each do |key, value| %>
     <div class="alert alert-<%= key %>"><%= value %></div>
   <% end %>
 <%= yield %>
+<%= render 'layouts/footer' %>
 </body>
 </html>

@@ -1,5 +1,5 @@
 class MeetingsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create]
+  before_action :authenticate_user!, only: [:new, :create, :edit]
   before_action :authenticate_entrepreneur!, only: [:show]
 
   def new
@@ -39,8 +39,25 @@ class MeetingsController < ApplicationController
     redirect_to "/meetings/#{@meeting.id}"
   end
 
+  def edit
+    @meeting = Meeting.find(params[:id])
+  end
+
+  def add
+    @entrepreneur = Entrepreneur.find_by_email(params[:email])
+    @meeting = Meeting.find(params[:id])
+    @meeting.entrepreneurs << @entrepreneur
+    redirect_to "/meetings/#{@meeting.id}/edit"
+  end
+
+  def next
+    @meeting = Meeting.last
+    redirect_to "/meetings/#{@meeting.id}"
+  end
+
   private
     def safe_meeting
+      params[:meeting][:date] = params[:meeting][:date].slice(6,4)+"/"+params[:meeting][:date].slice(0,2)+"/"+params[:meeting][:date].slice(3,2)
       params.require('meeting').permit(:location, :start_time, :date)
     end
 end

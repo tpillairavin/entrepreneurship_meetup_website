@@ -1,0 +1,60 @@
+<div>
+    <div>
+      <h1>
+        Here are the details of the meeting
+      </h1>
+    </div>
+    <div>
+      <p>
+          <%= @meeting.location %>
+          <br>
+          <%= @meeting.start_time %>
+          <br>
+          <%= @meeting.date.strftime("%d/%m/%y") %>
+      </p>
+    </div>
+
+    <div>
+      <iframe
+        width="800"
+        height="400"
+        frameborder="0" style="border:0"
+        src="<%="https://www.google.com/maps/embed/v1/place?key=#{ENV['MAPS_API_KEY']}
+          &q=#{@meeting.location.gsub!(' ','+').gsub!(',+',',')}"%>">
+      </iframe>
+    </div>
+
+    <div>
+        The following people are attending the meeting:
+        <% @meeting.entrepreneurs.each do |e| %>
+            <br>
+          <%= e.email %>
+        <% end %>
+      </div>
+
+    <div>
+      To add someone to the event, use the dropdown below:
+    </div>
+    <select id="entrepreneur">
+      <% Entrepreneur.all.each do |e| %>
+        <% if not(@meeting.entrepreneurs.include?(e)) %>
+          <option class="entrepreneur", id="email"><%= e.email %></option>
+        <% end %>
+      <% end %>
+    </select>
+      <button type="button" onClick=AddEntrepreneur()>Click Me!</button>
+</div>
+
+<script>
+    function SelectedEmail(){
+      var choice = document.getElementById('entrepreneur').value;
+      return choice
+    }
+
+    function AddEntrepreneur(){
+      base_url='<%="/meetings/add?id=#{@meeting.id}&email="%>'
+      email_param=encodeURIComponent(SelectedEmail())
+      final_url=base_url.concat(email_param)
+      setTimeout(window.location.href=final_url,20000);
+    }
+</script>
