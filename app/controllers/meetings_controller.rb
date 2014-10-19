@@ -52,7 +52,11 @@ class MeetingsController < ApplicationController
 
   def next
     @meeting = Meeting.last
-    redirect_to "/meetings/#{@meeting.id}"
+    if @meeting
+      redirect_to "/meetings/#{@meeting.id}"
+    else:
+      redirect_to "/meetings/new"
+    end
   end
 
   private
