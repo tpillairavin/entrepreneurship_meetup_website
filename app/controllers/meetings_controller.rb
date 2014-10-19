@@ -61,25 +61,6 @@ class MeetingsController < ApplicationController
 
   private
     def safe_meeting
-      try {
-        puts 'howdi'
-        params[:meeting][:date] = params[:meeting][:date].slice(6,4)+"/"+params[:meeting][:date].slice(0,2)+"/"+params[:meeting][:date].slice(3,2)
-      }
-      catch{
-        try {
-          puts 'hard times'
-          puts params[:meeting][:date].slice(6,4)
-          puts params[:meeting][:date].slice(0,2)
-          puts params[:meeting][:date]
-        }
-        catch{
-          puts 'hello'
-          puts params
-        }
-        puts 'missing date params '
-        puts params
-        puts 'those were the params'
-      }
       params.require('meeting').permit(:location, :start_time, :date)
     end
 end
