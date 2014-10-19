@@ -1,5 +1,4 @@
 class MeetingsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create, :edit]
   before_action :authenticate_entrepreneur!, only: [:show]
 
   def new
@@ -8,18 +7,8 @@ class MeetingsController < ApplicationController
 
   def create
     @meeting = Meeting.new(safe_meeting)
-    if
-      @meeting.save
-      begin
-        users = User.all
-        users.each do |u|
-          UserMailer.welcome_email(u).deliver
-        end
-      rescue
-        puts "Couldn't Send Emails"
-      ensure
-        redirect_to "/meetings/#{@meeting.id}"
-      end
+    if @meeting.save
+      redirect_to "/meetings/#{@meeting.id}"
     else
       flash['issue'] = 'missing fields'
       redirect_to "/meetings/new"
