@@ -7,9 +7,9 @@ class MeetingsController < ApplicationController
 
   def create
     @meeting = Meeting.new(safe_meeting)
-    if @meeting.save
+    begin @meeting.save
       redirect_to "/meetings/#{@meeting.id}"
-    else
+    rescue
       flash['issue'] = 'missing fields'
       redirect_to "/meetings/new"
     end
