@@ -1,5 +1,5 @@
 class MeetingsController < ApplicationController
-  before_action :authenticate_entrepreneur!, only: [:show]
+  before_action :authenticate_entrepreneur!, only: [:show, :new, :edit]
 
   def new
     @meeting = Meeting.new
