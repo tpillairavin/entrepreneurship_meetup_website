@@ -31,6 +31,8 @@ gem 'devise'
 # gem 'bcrypt', '~> 3.1.7'
 gem 'google-api-client'
 
+gem 'jquery-timepicker-rails'
+
 group :development, :test do
     gem 'sqlite3'
 end
