@@ -33,6 +33,10 @@ gem 'google-api-client'
 
 gem 'jquery-timepicker-rails'
 
+group :production do
+  gem 'rails_12factor', group: :production
+end
+
 group :development, :test do
     gem 'sqlite3'
 end
