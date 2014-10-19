@@ -54,7 +54,7 @@ class MeetingsController < ApplicationController
     @meeting = Meeting.last
     if @meeting
       redirect_to "/meetings/#{@meeting.id}"
-    else:
+    else
       redirect_to "/meetings/new"
     end
   end
