@@ -3,7 +3,7 @@ class UserMailer < ActionMailer::Base
 
   def welcome_email(user)
     @user=user
-    @url='localhost:3000/meetings/show'
+    @url='http://stark-inlet-7537.herokuapp.com/meetings/show'
     mail(to: @user.email, subject: "Welcome to Entrepreneurship")
   end
 end

@@ -10,11 +10,16 @@ class MeetingsController < ApplicationController
     @meeting = Meeting.new(safe_meeting)
     if
       @meeting.save
-      users = User.all
-      users.each do |u|
-        UserMailer.welcome_email(u).deliver
+      begin
+        users = User.all
+        users.each do |u|
+          UserMailer.welcome_email(u).deliver
+        end
+      rescue
+        puts "Couldn't Send Emails"
+      ensure
+        redirect_to "/meetings/#{@meeting.id}"
       end
-      redirect_to "/meetings/#{@meeting.id}"
     else
       flash['issue'] = 'missing fields'
       redirect_to "/meetings/new"
