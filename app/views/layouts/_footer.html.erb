@@ -5,7 +5,7 @@
     <%= link_to "Sign in", entrepreneur_session_path %>
     <%= link_to "Register", new_entrepreneur_registration_path %>
   <% end %>
-  <% if entrepreneur_signed_in? %>
+  <% if current_entrepreneur.admin %>
     <%= button_to "Create a meeting", new_meeting_path, 'data-no-turbolink' => true, :class => 'footer_button',method: :get %>
   <% end %>
 </ul>
