@@ -31,7 +31,7 @@
 </iframe>
 </div>
 <div>
-  <% if current_entrepreneur.admin %>
+  <% if administrator(current_entrepreneur) %>
     <%= link_to "Edit this meeting", "/meetings/#{@meeting.id}/edit" %>
   <% end %>
 </div>
